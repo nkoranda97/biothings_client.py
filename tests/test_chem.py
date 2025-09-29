@@ -290,10 +290,10 @@ def test_query_pharmgkb(chem_client: MyChemInfo):
 
 
 def test_query_ndc(chem_client: MyChemInfo):
-    qres = chem_client.query('ndc.productndc:"27437-051"')
+    qres = chem_client.query('ndc.productndc:"0006-5331"')
     assert "hits" in qres
     assert len(qres["hits"]) == 1
-    assert qres["hits"][0]["_id"] == "KPQZUUQMTUIKBP-UHFFFAOYSA-N"
+    assert qres["hits"][0]["_id"] == "LOMMPXLFBTZENJ-ZACQAIPSSA-N"
 
 
 @pytest.mark.xfail
