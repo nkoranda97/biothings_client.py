@@ -35,6 +35,7 @@ from biothings_client.client.exceptions import CachingNotSupportedError, Optiona
 from biothings_client.mixins.gene import MyGeneClientMixin
 from biothings_client.mixins.variant import MyVariantClientMixin
 from biothings_client.utils.copy import copy_func
+from biothings_client.utils.dataframe import _normalize_dataframe_for_arrow
 from biothings_client.utils.iteration import concatenate_list, iter_n, list_itemcnt
 
 if _PANDAS:
@@ -224,6 +225,7 @@ class BiothingClient:
                     df = pandas.DataFrame.from_dict(obj)
             if df_index:
                 df = df.set_index("query")
+            df = _normalize_dataframe_for_arrow(df)
             return df
         else:
             dataframe_library_error = OptionalDependencyImportError(

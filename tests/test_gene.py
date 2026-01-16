@@ -260,6 +260,17 @@ def test_querymany_dataframe(gene_client: MyGeneInfo):
     assert set(query_list1) == set(qres.index)
 
 
+@pytest.mark.skipif(not biothings_client._PANDAS, reason="pandas library not installed")
+def test_querymany_dataframe_polars_conversion(gene_client: MyGeneInfo):
+    pl = pytest.importorskip("polars")
+
+    genes = ["NR4A2", "ESR1", "ESRRA", "ESRRG", "HNF4G"]
+    results = gene_client.querymany(genes, scopes="symbol", fields="go", species="human", as_dataframe=True)
+    polars_results = pl.from_pandas(results)
+    assert isinstance(polars_results, pl.DataFrame)
+    assert any(column.startswith("go.") for column in polars_results.columns)
+
+
 def test_querymany_step(gene_client: MyGeneInfo):
     query_list1 = [
         "1007_s_at",

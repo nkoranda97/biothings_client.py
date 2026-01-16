@@ -17,7 +17,7 @@ authors = [
     {name = "Johnathan Schaff", email = "jschaff@scripps.edu"},
     {name = "Chunlei Wu", email = "cwu@scripps.edu"},
 ]
-requires-python = ">=3.6"
+requires-python = ">=3.8"
 description = "Python Client for BioThings API services."
 readme = "README.rst"
 license = { text = "BSD-3-Clause" }
@@ -71,6 +71,7 @@ dependencies = [
     # "httpx>=0.24.0; python_version=='3.7'",
     "httpx>=0.22.0",    # the last version supports python 3.6
     "importlib-metadata; python_version<'3.8'",
+    "numpy>=1.24.4",
 ]
 version = "0.4.1"
 
@@ -96,6 +97,17 @@ tests = [
 homepage = "https://github.com/biothings/biothings_client.py"
 repository = "https://github.com/biothings/biothings_client.py"
 documentation = "https://biothings-clientpy.readthedocs.io"
+
+[dependency-groups]
+dataframe = [
+    "pandas>=2.0.3",
+]
+tests = [
+    "polars>=1.8.2",
+    "pyarrow>=17.0.0",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.24.0",
+]
 
 [tool.setuptools]
 zip-safe = true
